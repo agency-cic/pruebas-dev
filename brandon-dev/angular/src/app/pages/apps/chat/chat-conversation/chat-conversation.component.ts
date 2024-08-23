@@ -137,10 +137,10 @@ export class ChatConversationComponent implements OnInit {
     // Puedes formatear el contenido aquí según sea necesario
     // Por ejemplo, agregar saltos de línea, listas, negritas, etc.
     // Esto es solo un ejemplo básico:
-    
     const paragraphs = response.split('\n').map(paragraph => `<p>${paragraph}</p>`);
     return paragraphs.join('');
   }
+  
   
   
 
