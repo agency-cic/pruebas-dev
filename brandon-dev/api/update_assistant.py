@@ -22,7 +22,7 @@ print(file_batch.file_counts) """
 from openai import OpenAI
 
 # Configura la API de OpenAI
-api_key = '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'
+api_key = "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"
 client = OpenAI(api_key=api_key)
 
 # ID del asistente que quieres modificar
@@ -36,12 +36,30 @@ try:
     updated_assistant = client.beta.assistants.update(
         assistant_id=assistant_id,
         tools=[
+            {
+                "type": "function",
+                "function": {
+                    "name": "get_car_info",
+                    "description": "Consulta y muestra la información de todos los autos, define cuál es el auto más caro, cual es el más barato y la media de todos los precios",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "conexion": {
+                                "type": "object",
+                                "description": "conexion a la base de datos mysql",
+                            },
+                        },
+                        "required": ["conexion"],
+                    },
+                },
+            },
             {"type": "code_interpreter"},
-            {"type": "file_search"}, 
+            {"type": "file_search"}
         ],
-        tool_resources={"file_search": {"vector_store_ids": [vector_id]}},
-)
-    
-    print(f"Las herramientas del asistente se han actualizado correctamente. Nuevo estado: {updated_assistant}")
+    )
+
+    print(
+        f"Las herramientas del asistente se han actualizado correctamente. Nuevo estado: {updated_assistant}"
+    )
 except Exception as e:
     print(f"Error al actualizar las herramientas del asistente: {e}")
