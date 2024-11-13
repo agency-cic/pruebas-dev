@@ -22,7 +22,7 @@ print(file_batch.file_counts) """
 from openai import OpenAI
 
 # Configura la API de OpenAI
-api_key = "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"
+api_key = "*****************************"
 client = OpenAI(api_key=api_key)
 
 # ID del asistente que quieres modificar
